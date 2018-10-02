@@ -22,27 +22,20 @@ h1 {
     background-color:#4FB99F;
     border-radius:10px;
     color:#fff;
-        font-size: 2em;
+    font-size: 2em;
 }
 .fas {
     padding-top:1.5em;
 }
-.front,
-.back {
+.card {
     height: 100%;
     position: absolute;
     width: 100%;
     text-align: center;
     border-radius:10px;
-   
-
 }
 .front {
     background-color:#068587;
-    transform: rotateY(180deg);
-}
-.back {
-    transform: rotateY(180deg);
 }
 .visible {
     z-index:100;
