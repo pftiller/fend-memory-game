@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', generateCards);
 let currentClicks = 0;
 let correctMatches = 0;
 let fragment = document.createDocumentFragment();
+let cardContainer = document.createElement('div');
+let firstTarget;
+let secondTarget;
 let guessOne;
 let guessTwo;
 
@@ -34,64 +37,73 @@ function generateCards() {
     for (let i = icons.length; i > 0; i--) {
             let backOfCard = document.createElement('div');
             let frontOfCard = document.createElement('div');
-            let cardContainer = document.createElement('div');
-            let randomNumber = Math.floor((Math.random() * icons.length));
+            let card = document.createElement('div');
             cardContainer.classList.add('container');
-            cardContainer.addEventListener('click', function(event){
-                 
+            card.classList.add('card');
+            let randomNumber = Math.floor((Math.random() * icons.length));
+            card.addEventListener('click', function(event){
                 flipCard(event)
-            });
-            frontOfCard.classList.add('card', 'front');
-            backOfCard.classList.add('card', 'back', 'fas', `${icons[randomNumber]}`);
-            cardContainer.appendChild(backOfCard);
-            cardContainer.appendChild(frontOfCard);
-            fragment.appendChild(cardContainer)
+            }, false);
+            frontOfCard.classList.add('back');
+            backOfCard.classList.add('front', 'fas', `${icons[randomNumber]}`);
+            card.appendChild(backOfCard);
+            card.appendChild(frontOfCard);
+            fragment.appendChild(card)
             icons.splice(randomNumber, 1);
     }
-    document.body.appendChild(fragment);
+    cardContainer.appendChild(fragment);
+    document.body.appendChild(cardContainer);
 }
 
 
-function flipCard(event, u) {
-    console.log('hello', event.target);
-    if(event.target.classList.contains('back')) {
-        event.target.classList.replace('back', 'front');
-        event.target.classList.toggle('active');  
-        currentClicks -= 1;
+function flipCard(event) {
+    var element = event.currentTarget;
+	if (element.className === "card") {
+    if(element.style.transform == "rotateY(180deg)") {
+      element.style.transform = "rotateY(0deg)";
     }
     else {
-        event.target.classList.replace('front','back');
-        event.target.classList.toggle('active');  
-        currentClicks += 1;
-        if(currentClicks === 1) {
-            guessOne = event.target.previousElementSibling.classList[3];
-        }
-        else if(currentClicks === 2) {
-            guessTwo = event.target.previousElementSibling.classList[3];
-            currentClicks = 0;
-            if(guessOne == guessTwo) {
-                correctMatches += 1;
-                    let firstMatchedCard = document.querySelector('.active')
-                    firstMatchedCard.classList.replace('active', 'matched');
-                    firstMatchedCard.removeEventListener('click', flipCard)
-                    let secondMatchedCard = document.querySelector('.active')
-                    secondMatchedCard.classList.replace('active', 'matched');
-                    secondMatchedCard.removeEventListener('click', flipCard)
-            }
-            else {
-                setTimeout(() => {
-                    let firstUnmatchedCard = document.querySelector('.active')
-                    firstUnmatchedCard.classList.replace('back', 'front');
-                    firstUnmatchedCard.classList.toggle('active');
-                    let secondUnmatchedCard = document.querySelector('.active')
-                    secondUnmatchedCard.classList.replace('back', 'front');
-                    secondUnmatchedCard.classList.toggle('active');
-                }, 1000);
-                
-            }
-        }
-        else {
-          
-        }
+      element.style.transform = "rotateY(180deg)";
     }
-}
+  }
+};
+
+
+
+
+
+    // if(event.target.classList.contains('back')) {
+    //     event.target.previousElementSibling.classList.toggle('visible');
+    //     currentClicks += 1;
+    //     if(currentClicks === 1) {
+    //         firstTarget = event.target;
+    //         guessOne = event.target.previousElementSibling.classList[2];
+    //     }
+    //     else if(currentClicks === 2) {
+    //         secondTarget = event.target;
+    //         guessTwo = event.target.previousElementSibling.classList[2];
+    //         currentClicks = 0;
+    //         if(guessOne == guessTwo) {
+    //             correctMatches += 1;
+    //                 let firstMatchedCard = document.querySelector('.visible')
+    //                 firstMatchedCard.classList.replace('visible', 'matched');
+    //                 firstTarget.parentElement.removeEventListener('click', flipCard);
+    //                 let secondMatchedCard = document.querySelector('.visible')
+    //                 secondMatchedCard.classList.replace('visible', 'matched');
+    //                 secondTarget.parentElement.removeEventListener('click', flipCard);
+    //         }
+    //         else {
+    //             setTimeout(() => {
+    //                 let firstUnmatchedCard = document.querySelector('.visible')
+    //                 firstUnmatchedCard.classList.toggle('visible');
+    //                 let secondUnmatchedCard = document.querySelector('.visible')
+    //                 secondUnmatchedCard.classList.toggle('visible');
+    //             }, 1000);
+                
+    //         }
+    //     }
+    // }
+    // else {
+    //     event.target.classList.toggle('visible');
+    //     currentClicks -= 1;
+    // }

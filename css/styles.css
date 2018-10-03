@@ -3,41 +3,56 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color:#F4EEE2;
 }
-main {
-    width: 95%;
-    margin: 25px auto;
+.container {
+    width:95%;
+    margin:0 auto;
 }
 h1 {
     margin: 15px auto;
     text-align:center;
 }
-.container {
-    width:20%;
-    height:125px;
-    margin-bottom: 20px;
-    position: relative;
-    display:inline-flex;
-    margin-right:2.5%;
-    margin-left:2.5%;
-    background-color:#4FB99F;
-    border-radius:10px;
-    color:#fff;
-    font-size: 2em;
-}
-.fas {
-    padding-top:1.5em;
-}
 .card {
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    text-align: center;
+    margin: 10px;
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+    width: 220px;
+    height: 260px;
+    transition: transform 2s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+
     border-radius:10px;
+}
+.front,
+.back {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius:10px;
+    backface-visibility: hidden
 }
 .front {
+    height: 83%;
+    padding-top: 20%;
+    color:#fff;
+    text-align: center;
+    font-size:2em;
+    background-color:#4FB99F;
+    transform: rotateY(180deg);
+
+}
+.back {
     background-color:#068587;
+
+    height: 100%;
 }
-.visible {
-    z-index:100;
-    display:block;
-}
+/* .matched {
+    visibility: visible;
+} */
+/* .visible {
+    visibility: visible;
+} */
