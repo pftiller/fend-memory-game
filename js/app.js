@@ -41,9 +41,7 @@ function generateCards() {
             cardContainer.classList.add('container');
             card.classList.add('card');
             let randomNumber = Math.floor((Math.random() * icons.length));
-            card.addEventListener('click', function(event){
-                flipCard(event)
-            }, false);
+            card.addEventListener('click', flipCard)
             frontOfCard.classList.add('back');
             backOfCard.classList.add('front', 'fas', `${icons[randomNumber]}`);
             card.appendChild(backOfCard);
@@ -57,13 +55,38 @@ function generateCards() {
 
 
 function flipCard(event) {
+    console.log('event fired');
     var element = event.currentTarget;
 	if (element.className === "card") {
-    if(element.style.transform == "rotateY(180deg)") {
-      element.style.transform = "rotateY(0deg)";
+        if(element.style.transform == "rotateY(180deg)") {
+            currentClicks -= 1;  
+            element.style.transform = "rotateY(0deg)";
+        
     }
     else {
       element.style.transform = "rotateY(180deg)";
+      currentClicks += 1;
+      if(currentClicks ===1) {
+            firstTarget = element;
+            guessOne = firstTarget.querySelector('div').classList[2];
+            console.log(guessOne);
+      }
+      else if(currentClicks === 2) {
+            secondTarget = element;
+            guessTwo = secondTarget.querySelector('div').classList[2];
+            currentClicks = 0;
+                if(guessOne == guessTwo) {
+                    correctMatches += 1;
+                    firstTarget.removeEventListener('click', flipCard);
+                    secondTarget.removeEventListener('click', flipCard);
+                }
+                else {
+                    setTimeout(() => {
+                        firstTarget.style.transform = "rotateY(0deg)";
+                        secondTarget.style.transform = "rotateY(0deg)";
+                    }, 2000);
+                }
+        }
     }
   }
 };
