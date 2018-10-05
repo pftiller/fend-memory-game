@@ -35,24 +35,22 @@ h1 {
     border-radius:10px;
     backface-visibility: hidden
 }
+.matched,
 .front {
     height: 83%;
     padding-top: 20%;
     color:#fff;
     text-align: center;
     font-size:2em;
+}
+.front {
     background-color:#4FB99F;
     transform: rotateY(180deg);
-
 }
 .back {
     background-color:#068587;
-
     height: 100%;
 }
-/* .matched {
-    visibility: visible;
-} */
-/* .visible {
-    visibility: visible;
-} */
+.matched {
+    background-color:#FFAAD2;
+}

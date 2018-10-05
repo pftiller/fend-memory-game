@@ -78,7 +78,9 @@ function flipCard(event) {
                 if(guessOne == guessTwo) {
                     correctMatches += 1;
                     firstTarget.removeEventListener('click', flipCard);
+                    firstTarget.querySelector('div').classList.add('matched');
                     secondTarget.removeEventListener('click', flipCard);
+                    secondTarget.querySelector('div').classList.add('matched');
                 }
                 else {
                     setTimeout(() => {
