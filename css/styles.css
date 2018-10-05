@@ -3,26 +3,38 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color:#F4EEE2;
 }
+
+h1 {
+    margin: 15px auto;
+    text-align: center;
+}
+.left {
+    float:left;
+    margin-left:20%;
+}
+.right {
+    float:right;
+    margin-right:20%
+    
+}
 .container {
+    clear:both;
     width:95%;
     margin:0 auto;
-}
-h1,
-h2 {
-    margin: 15px auto;
-    text-align:center;
+    justify-content: center;
+	flex-wrap: wrap;
+    position: relative;
 }
 .card {
     margin: 10px;
     display: inline-flex;
-    justify-content: center;
-    position: relative;
+
     width: 220px;
     height: 260px;
     transition: transform 2s;
     transform-style: preserve-3d;
     cursor: pointer;
-
+    text-align: center;
     border-radius:10px;
 }
 .front,
@@ -41,7 +53,6 @@ h2 {
     height: 83%;
     padding-top: 20%;
     color:#fff;
-    text-align: center;
     font-size:2em;
 }
 .front {

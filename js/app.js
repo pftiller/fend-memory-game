@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', generateCards);
 
 let currentClicks = 0;
 let correctMatches = 0;
+let moves = 0;
 let fragment = document.createDocumentFragment();
 let cardContainer = document.createElement('div');
 let firstTarget;
@@ -31,9 +32,10 @@ let guessTwo;
 
 
 
+
 function generateCards() {
     console.log('starting to run function');
-    document.body.innerHTML = `<h1>Matching Game</h1><h2>Matches: ${correctMatches}`;
+    document.body.innerHTML = `<h1>Matching Game</h1><h2 class="left">Matches: ${correctMatches}</h2><h2 class="right">Moves: ${moves}</h2>`;
     for (let i = icons.length; i > 0; i--) {
             let backOfCard = document.createElement('div');
             let frontOfCard = document.createElement('div');
@@ -74,9 +76,10 @@ function flipCard(event) {
       else if(currentClicks === 2) {
             secondTarget = element;
             guessTwo = secondTarget.querySelector('div').classList[2];
+            document.querySelector('.right').innerText=`Moves: ${moves +=1}`;
             currentClicks = 0;
                 if(guessOne == guessTwo) {
-                    document.querySelector('h2').innerText=`Matches: ${correctMatches +=1}`;
+                    document.querySelector('.left').innerText=`Matches: ${correctMatches +=1}`;
                     firstTarget.removeEventListener('click', flipCard);
                     firstTarget.querySelector('div').classList.add('matched');
                     secondTarget.removeEventListener('click', flipCard);
