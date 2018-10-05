@@ -33,7 +33,7 @@ let guessTwo;
 
 function generateCards() {
     console.log('starting to run function');
-    document.body.innerHTML = `<h1>Matching Game</h1>`;
+    document.body.innerHTML = `<h1>Matching Game</h1><h2>Matches: ${correctMatches}`;
     for (let i = icons.length; i > 0; i--) {
             let backOfCard = document.createElement('div');
             let frontOfCard = document.createElement('div');
@@ -76,7 +76,7 @@ function flipCard(event) {
             guessTwo = secondTarget.querySelector('div').classList[2];
             currentClicks = 0;
                 if(guessOne == guessTwo) {
-                    correctMatches += 1;
+                    document.querySelector('h2').innerText=`Matches: ${correctMatches +=1}`;
                     firstTarget.removeEventListener('click', flipCard);
                     firstTarget.querySelector('div').classList.add('matched');
                     secondTarget.removeEventListener('click', flipCard);
@@ -86,7 +86,7 @@ function flipCard(event) {
                     setTimeout(() => {
                         firstTarget.style.transform = "rotateY(0deg)";
                         secondTarget.style.transform = "rotateY(0deg)";
-                    }, 2000);
+                    }, 1500);
                 }
         }
     }
