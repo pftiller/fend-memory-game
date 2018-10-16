@@ -29,10 +29,6 @@ let secondTarget;
 let guessOne;
 let guessTwo;
 
-
-
-
-
 function generateCards() {
     console.log('starting to run function');
     document.body.innerHTML = `<h1>Matching Game</h1><h2 class="left">Matches: ${correctMatches}</h2><h2 class="right">Moves: ${moves}</h2>`;
@@ -53,8 +49,11 @@ function generateCards() {
     }
     cardContainer.appendChild(fragment);
     document.body.appendChild(cardContainer);
+    let modal = document.createElement('div');
+    modal.classList.add('modal');
+    modal.innerHTML = '<div class="modal-content"><h1>Congratulations!</h1><p class="text-align:center">You matched all the cards!</p><button class="replay-btn" onClick=location.reload()>Replay</button></div>';
+    document.body.appendChild(modal);
 }
-
 
 function flipCard(event) {
     console.log('event fired');
@@ -84,14 +83,19 @@ function flipCard(event) {
                     firstTarget.querySelector('div').classList.add('matched');
                     secondTarget.removeEventListener('click', flipCard);
                     secondTarget.querySelector('div').classList.add('matched');
+                    if(correctMatches===8) {
+                        setTimeout(() => {
+                            document.querySelector('.modal').classList.toggle('show-modal');
+                        }, 2000);
+                    }
                 }
                 else {
                     setTimeout(() => {
                         firstTarget.style.transform = "rotateY(0deg)";
                         secondTarget.style.transform = "rotateY(0deg)";
-                    }, 1500);
+                    }, 2000);
                 }
+            }
         }
     }
-  }
 };
