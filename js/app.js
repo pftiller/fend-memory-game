@@ -24,7 +24,6 @@ let correctMatches = 0;
 let flips = 0;
 let seconds = 0;
 let moves = 0;
-let timer = document.createElement('div');
 let fragment = document.createDocumentFragment();
 let cardContainer = document.createElement('div');
 let timeKeeper;
@@ -35,7 +34,6 @@ let guessTwo;
 
 function generateCards() {
     console.log('starting to run function');
-    document.body.innerHTML = `<h1>Matching Game</h1><h2 class="left">Matches: ${correctMatches}</h2><h2 class="right">Moves: ${moves}</h2><h3>Time: ${seconds} seconds</h3>`;
     for (let i = icons.length; i > 0; i--) {
             let backOfCard = document.createElement('div');
             let frontOfCard = document.createElement('div');
@@ -81,6 +79,7 @@ function flipCard(event) {
                 console.log(guessOne);
         }
         else if(currentClicks === 2) {
+                adjustStars()
                 secondTarget = element;
                 guessTwo = secondTarget.querySelector('div').classList[2];
                 document.querySelector('.right').innerText=`Moves: ${moves +=1}`;
@@ -108,7 +107,17 @@ function flipCard(event) {
             }
         }
     }
-
+function adjustStars() {
+    if(moves === 15) {
+        document.querySelector('#stars').textContent='\uf005 \uf005';
+    }
+    else if (moves === 23) {
+        document.querySelector('#stars').textContent='\uf005';
+    }
+    else if (moves > 28) {
+        document.querySelector('#stars').textContent='0';
+    }
+}
 
 
 function myTimer() {
